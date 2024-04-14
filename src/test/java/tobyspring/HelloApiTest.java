@@ -27,7 +27,7 @@ public class HelloApiTest {
                 .isEqualTo(MediaType.TEXT_PLAIN.getType());
 
         // body Hello Spring
-        Assertions.assertThat(res.getBody()).isEqualTo("Hello spring");
+        Assertions.assertThat(res.getBody()).isEqualTo("*Hello spring*");
     }
 
     @Test
