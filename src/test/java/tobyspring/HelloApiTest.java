@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
 public class HelloApiTest {
 
     @Test
-    void helloApi() throws URISyntaxException {
+    void helloApi() {
         // http localhost:8080/hello?name=Spring
         TestRestTemplate rest = new TestRestTemplate();
 
@@ -23,11 +23,22 @@ public class HelloApiTest {
         Assertions.assertThat(res.getStatusCode()).isEqualTo(HttpStatus.OK);
 
         // header(content-type) text/plain
-        System.out.println(res.getHeaders().getContentType());
         Assertions.assertThat(res.getHeaders().getContentType().getType().split(";")[0])
                 .isEqualTo(MediaType.TEXT_PLAIN.getType());
 
         // body Hello Spring
         Assertions.assertThat(res.getBody()).isEqualTo("Hello spring");
+    }
+
+    @Test
+    void failsHelloApi() {
+        // http localhost:8080/hello?name=Spring
+        TestRestTemplate rest = new TestRestTemplate();
+
+        ResponseEntity<String> res =
+                rest.getForEntity("http://localhost:8080/hello?name=", String.class);
+
+        // status 200
+        Assertions.assertThat(res.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
