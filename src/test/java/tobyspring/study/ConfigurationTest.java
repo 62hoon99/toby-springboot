@@ -40,7 +40,7 @@ public class ConfigurationTest {
         assertThat(bean1.common).isSameAs(bean2.common);
     }
 
-    static class MyConfigProxy extends  MyConfig {
+    static class MyConfigProxy extends MyConfig {
         private Common common;
 
         @Override
